@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Playlists {% endblock %}</h1>
+    {% for playlist in playlists %}
+    <a >
+        <h2>#{{ loop.index }} - {{ playlist['name'] }}</h2>
+        <img src="{{ playlist['thumbnail'] }}" alt="playlist thumbnail" width="480" height="360"></img>
+    </a>
+    <span class="badge badge-primary">{{ playlist['published_at'] }}</span>
+    <hr>
+    {% endfor %}
+{% endblock %}
