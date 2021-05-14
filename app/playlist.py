@@ -13,7 +13,7 @@ class Playlist():
     def get(playlist_id):
         db = get_db_connection()
         playlist = db.execute(
-            "SELECT * FROM playlist WHERE id = ?", (playlist_id,)
+            "SELECT * FROM playlists WHERE id = ?", (playlist_id,)
         ).fetchone()
         if not playlist:
             return None
@@ -27,7 +27,7 @@ class Playlist():
     def create(id_, name, thumbnail,published_at):
         db = get_db_connection()
         db.execute(
-            "INSERT INTO playlist (id, name, thumbnail,published_at) "
+            "INSERT INTO playlists (id, name, thumbnail,published_at) "
             "VALUES (?, ?, ?, ?)",
             (id_, name, thumbnail,published_at),
         )

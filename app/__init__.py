@@ -71,7 +71,7 @@ def get_google_provider_cfg():
 def index():
     if current_user.is_authenticated:
         conn = get_db_connection()
-        playlists = conn.execute('SELECT * FROM playlist').fetchall()
+        playlists = conn.execute('SELECT * FROM playlists').fetchall()
         conn.close()
         return render_template('index.html', playlists= playlists,name=current_user.name, profile_pic=current_user.profile_pic)
     else:
