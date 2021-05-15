@@ -3,7 +3,7 @@
 {% block content %}
     <h1>{% block title %} Playlists {% endblock %}</h1>
     {% for playlist in playlists %}
-    <a >
+    <a href="{{ playlist['id'] }}" >
         <h2>#{{ loop.index }} - {{ playlist['name'] }}</h2>
         <img src="{{ playlist['thumbnail'] }}" alt="playlist thumbnail" width="480" height="360"></img>
     </a>
