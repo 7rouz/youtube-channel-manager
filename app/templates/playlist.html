@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{% block title %} Playlist {{ playlist_name }} content {% endblock %}</h1>
+  {% for video in videos %}
+  <a >
+    <h2>#{{ loop.index }} - {{ video['snippet']['title'] }}</h2>
+    <img src="{{ video['snippet']['thumbnails']['high']['url'] }}" alt="video thumbnail" width="480" height="360"></img>
+  </a>
+  <span class="badge badge-primary">{{ video['contentDetails']['videoPublishedAt']}}</span>
+  <hr>
+{% endfor %}
+{% endblock %}

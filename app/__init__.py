@@ -77,10 +77,17 @@ def index():
     else:
         return render_template("new_login.html")
 
-@app.route('/<int:post_id>')
-def post(post_id):
-    post = get_post(post_id)
-    return render_template('post.html', post=post)    
+@app.route('/<playlist_id>')
+def playlist(playlist_id):
+    # Get playlist details
+    yt_uri, yt_headers, yt_body = client.add_token("https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails,snippet,status,id&playlistId="+playlist_id+"&maxResults=50")
+    playlist_details_response = requests.get(yt_uri, headers=yt_headers, data=yt_body)
+    # Get playlist name from local DB
+    conn = get_db_connection()
+    playlist_name = conn.execute('SELECT name FROM playlists WHERE id = "'+playlist_id+'"').fetchone()['name']
+    conn.close()
+    print(playlist_name)
+    return render_template('playlist.html', playlist_id=playlist_id, playlist_name= playlist_name,name=current_user.name, profile_pic=current_user.profile_pic, videos=playlist_details_response.json()["items"])
 
 # Login
 @app.route("/login")
